@@ -77,12 +77,6 @@ export const headerMenuConfig: IHeaderMenu[] = [
     ],
   },
   {
-    title: '友链',
-    icon: h(FaSolidUserFriends),
-    path: '/friends',
-  },
-
-  {
     title: '更多',
     icon: h(FaSolidCircleNotch),
     path: '#',
@@ -101,11 +95,6 @@ export const headerMenuConfig: IHeaderMenu[] = [
         title: '一言',
         path: '/says',
         icon: h(FaSolidComments),
-      },
-      {
-        title: '跃迁',
-        icon: h(RMixPlanet),
-        path: 'https://travel.moe/go.html',
       },
     ],
   },

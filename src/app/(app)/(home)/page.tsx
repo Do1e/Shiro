@@ -186,9 +186,6 @@ const Hero = () => {
             'center text-neutral-800/80 dark:text-neutral-200/80',
           )}
         >
-          <small className="text-center">
-            当第一颗卫星飞向大气层外，我们便以为自己终有一日会征服宇宙。
-          </small>
           <span className="mt-8 animate-bounce">
             <i className="i-mingcute-right-line rotate-90 text-2xl" />
           </span>
@@ -234,11 +231,6 @@ const windsock = [
     path: '/timeline',
   },
   {
-    title: '朋友们',
-    icon: FaSolidUserFriends,
-    path: '/friends',
-  },
-  {
     title: '写下一点思考',
     icon: MdiLightbulbOn20,
     path: '/thinking',
@@ -252,11 +244,6 @@ const windsock = [
     title: '记录下一言',
     path: '/says',
     icon: FaSolidComments,
-  },
-  {
-    title: '跃迁',
-    icon: RMixPlanet,
-    path: 'https://travel.moe/go.html',
   },
 ]
 
@@ -321,57 +308,6 @@ const Windsock = () => {
             )
           })}
         </ul>
-      </div>
-
-      <div className="mt-24 flex justify-center gap-4">
-        <StyledButton
-          className="center flex gap-2 bg-red-400"
-          onClick={() => {
-            apiClient
-              .proxy('like_this')
-              .post()
-              .then(() => {
-                queryClient.setQueryData(likeQueryKey, (prev: any) => {
-                  return prev + 1
-                })
-              })
-
-            toast('谢谢你！', undefined, {
-              iconElement: (
-                <m.i
-                  className="i-mingcute-heart-fill text-uk-red-light"
-                  initial={{
-                    scale: 0.96,
-                  }}
-                  animate={{
-                    scale: 1.22,
-                  }}
-                  transition={{
-                    easings: ['easeInOut'],
-                    delay: 0.3,
-                    repeat: 5,
-                    repeatDelay: 0.3,
-                  }}
-                />
-              ),
-            })
-          }}
-        >
-          喜欢本站 <i className="i-mingcute-heart-fill" />{' '}
-          <NumberSmoothTransition>
-            {count as any as string}
-          </NumberSmoothTransition>
-        </StyledButton>
-
-        <StyledButton
-          className="center flex gap-2"
-          onClick={() => {
-            presentSubscribe()
-          }}
-        >
-          订阅
-          <i className="i-material-symbols-notifications-active" />
-        </StyledButton>
       </div>
     </>
   )

@@ -197,11 +197,7 @@ const FooterBottom = async () => {
           <Divider className="inline" />
 
           <SubscribeTextButton>
-            <Divider className="hidden md:inline" />
           </SubscribeTextButton>
-        </span>
-        <span className="mt-3 block md:mt-0 md:inline">
-          Stay hungry. Stay foolish.
         </span>
       </p>
       <div>
