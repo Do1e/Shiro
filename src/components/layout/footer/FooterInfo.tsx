@@ -198,8 +198,9 @@ const FooterBottom = async () => {
           </a>
           <Divider className="inline" />
 
-          <SubscribeTextButton>
-          </SubscribeTextButton>
+          <SubscribeTextButton />
+          <Divider className="inline" />
+          <GatewayInfo />
         </span>
       </p>
       <div>
@@ -221,18 +222,6 @@ const FooterBottom = async () => {
             </StyledLink>
           </>
         )}
-
-        {icp ? (
-          <Divider className="inline" />
-        ) : (
-          <Divider className="hidden md:inline" />
-        )}
-        {gov ? (
-          <Divider className="inline" />
-        ) : (
-          <Divider className="hidden md:inline" />
-        )}
-        <GatewayInfo />
         {/* {!!lastVisitor && (
           <>
             <Divider />
