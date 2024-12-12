@@ -174,13 +174,15 @@ const FooterBottom = async () => {
   const { footer } = data.theme
   const footerConfig = footer || {}
   const { otherInfo } = footerConfig
-  const currentYear = new Date().getFullYear().toString()
-  const { date = currentYear, icp } = otherInfo || {}
+  const currentDate = new Date().toLocaleDateString('en-CA', {
+    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+  })
+  const { date = currentDate, icp, gov } = otherInfo || {}
 
   return (
     <div className="mt-12 space-y-3 text-center md:mt-6 md:text-left">
       <p>
-        <span>© {date.replace('{{now}}', currentYear)} </span>
+        <span>© {date.replace('{{now}}', currentDate)} </span>
         <a href="/">
           <OwnerName />
         </a>
@@ -211,7 +213,21 @@ const FooterBottom = async () => {
           </>
         )}
 
+        {gov && (
+          <>
+            <Divider className="hidden md:inline" />
+            <StyledLink href={gov.link} target="_blank" rel="noreferrer">
+              {gov.text}
+            </StyledLink>
+          </>
+        )}
+
         {icp ? (
+          <Divider className="inline" />
+        ) : (
+          <Divider className="hidden md:inline" />
+        )}
+        {gov ? (
           <Divider className="inline" />
         ) : (
           <Divider className="hidden md:inline" />

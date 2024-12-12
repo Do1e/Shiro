@@ -1,5 +1,7 @@
 FROM node:18-alpine AS base
 
+RUN npm config set registry https://registry.npmmirror.com
+
 RUN npm install -g --arch=x64 --platform=linux sharp
 
 FROM base AS deps
