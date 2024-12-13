@@ -210,18 +210,22 @@ const FooterBottom = async () => {
         {icp && (
           <>
             <Divider className="hidden md:inline" />
-            <StyledLink href={icp.link} target="_blank" rel="noreferrer">
-              {icp.text}
-            </StyledLink>
+            <span className="my-3 block md:my-0 md:inline">
+              <StyledLink href={icp.link} target="_blank" rel="noreferrer">
+                {icp.text}
+              </StyledLink>
+            </span>
           </>
         )}
 
         {gov && (
           <>
             <Divider className="hidden md:inline" />
-            <StyledLink href={gov.link} target="_blank" rel="noreferrer">
-              {gov.text}
-            </StyledLink>
+            <span className="my-3 block md:my-0 md:inline">
+              <StyledLink href={gov.link} target="_blank" rel="noreferrer">
+                {gov.text}
+              </StyledLink>
+            </span>
           </>
         )}
         {/* {!!lastVisitor && (
