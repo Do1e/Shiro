@@ -99,11 +99,10 @@ export const GatewayInfo = () => {
         offset={10}
         triggerElement={
           <span key={count} className="cursor-pointer">
-            正在被{' '}
             <span>
               <NumberSmoothTransition>{count}</NumberSmoothTransition>
             </span>{' '}
-            人观看
+            人正在浏览
           </span>
         }
       >
@@ -171,7 +170,7 @@ const RoomsInfo = () => {
     return <div className="text-gray-500">还没有小伙伴在阅览文章哦~</div>
   return (
     <div className="lg:max-w-[400px]">
-      <div className="mb-2 text-sm font-medium">下面的内容正在被观看：</div>
+      <div className="mb-2 text-sm font-medium">下面的内容正在被浏览：</div>
       <ul className="flex flex-col justify-between gap-2">
         {data.map((room) => (
           <li key={room.path} className="flex items-center justify-between">
