@@ -174,8 +174,10 @@ const FooterBottom = async () => {
   const { footer } = data.theme
   const footerConfig = footer || {}
   const { otherInfo } = footerConfig
-  const currentDate = new Date().toLocaleDateString('en-CA', {
-    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+  const currentDate = new Date().toLocaleString('zh-CN', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
   })
   const { date = currentDate, icp, gov } = otherInfo || {}
 
