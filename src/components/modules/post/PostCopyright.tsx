@@ -102,7 +102,7 @@ export const PostCopyright: FC = () => {
               navigator.clipboard.writeText(
                 `This code is copied from ${
                   link
-                } and is licensed under MIT License\n\nMIT License:\n\nCopyright (c) ${created.slice(
+                } and is licensed under MIT License:\n\nMIT License\n\nCopyright (c) ${created.slice(
                   0,
                   4,
                 )} ${
