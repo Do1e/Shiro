@@ -54,7 +54,7 @@ const FooterLinkSection = async () => {
             className="flex items-center gap-4 md:inline-flex"
             key={section.name}
           >
-            <b className="inline-flex items-center font-medium">
+            <b className="inline-flex items-center font-semibold">
               {section.name}
               <IonIosArrowDown className="ml-2 inline -rotate-90 select-none" />
             </b>
