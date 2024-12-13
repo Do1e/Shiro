@@ -20,12 +20,13 @@ export const PostCopyright: FC = () => {
         title: data.title,
         link: `${webUrl}/posts/${data.category.slug}/${data.slug}`,
         date: data.modified,
+        created: data.created,
       }
     },
     [webUrl],
   )
   if (!data) return null
-  const { title, link, date } = data
+  const { title, link, date, created } = data
   return (
     <section
       className="mt-4 text-sm leading-loose text-gray-600 dark:text-neutral-400"
@@ -86,6 +87,35 @@ export const PostCopyright: FC = () => {
             CC BY-NC-SA 4.0 - 非商业性使用 - 相同方式共享 4.0 国际
           </a>
           进行许可。
+        </p>
+        <p>
+          文中所有代码均使用
+          <a
+            className="shiro-link--underline"
+            href="https://opensource.org/license/mit"
+          >
+            MIT License
+          </a>
+          进行许可。欢迎使用但请在代码中保留原作者信息和许可协议，点击
+          <a
+            onClick={() => {
+              navigator.clipboard.writeText(
+                `This code is from ${ 
+                  link 
+                  } and is licensed under MIT License\n\nMIT License\n\nCopyright (c) ${ 
+                  created.slice(0, 4) 
+                  } ${ 
+                  name 
+                  }\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the "Software"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.`,
+              )
+              toast.success('已复制License信息到剪贴板')
+            }}
+            data-hide-print
+            className="cursor-pointer select-none"
+          >
+            [复制]
+          </a>
+          。
         </p>
       </div>
     </section>
