@@ -281,7 +281,7 @@ const List = () => {
                     <span>{item.up}</span>
                   </button>
 
-                  <button
+                  {/* <button
                     onClick={() => {
                       handleDown(item.id)
                     }}
@@ -289,7 +289,7 @@ const List = () => {
                     <i className="i-mingcute-heart-crack-line" />
                     <span className="sr-only">不喜欢</span>
                     <span>{item.down}</span>
-                  </button>
+                  </button> */}
 
                   <DeleteButton id={item.id} />
                 </div>
