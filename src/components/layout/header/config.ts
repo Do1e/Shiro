@@ -8,12 +8,10 @@ import {
   FaSolidDotCircle,
   FaSolidFeatherAlt,
   FaSolidHistory,
-  FaSolidUserFriends,
   IcTwotoneSignpost,
   IonBook,
   MdiFlask,
   MdiLightbulbOn20,
-  RMixPlanet,
 } from '~/components/icons/menu-collection'
 
 export interface IHeaderMenu {
@@ -77,15 +75,15 @@ export const headerMenuConfig: IHeaderMenu[] = [
     ],
   },
   {
+    title: '思考',
+    icon: h(MdiLightbulbOn20),
+    path: '/thinking',
+  },
+  {
     title: '更多',
     icon: h(FaSolidCircleNotch),
     path: '#',
     subMenu: [
-      {
-        title: '思考',
-        icon: h(MdiLightbulbOn20),
-        path: '/thinking',
-      },
       {
         title: '项目',
         icon: h(MdiFlask),
