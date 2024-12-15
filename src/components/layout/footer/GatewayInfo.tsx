@@ -99,10 +99,15 @@ export const GatewayInfo = () => {
         offset={10}
         triggerElement={
           <span key={count} className="cursor-pointer">
-            <span>
-              <NumberSmoothTransition>{count}</NumberSmoothTransition>
-            </span>{' '}
-            人正在浏览
+            {count < 2 ? (
+              <span>只有特别的你正在浏览本站</span>
+            ) : (
+              <span>
+                还有{' '}
+                <NumberSmoothTransition>{count - 1}</NumberSmoothTransition>{' '}
+                人正在浏览本站
+              </span>
+            )}
           </span>
         }
       >
