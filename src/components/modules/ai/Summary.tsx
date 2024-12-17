@@ -31,7 +31,8 @@ export const AISummary: FC<AiSummaryProps> = (props) => {
     retryDelay: 5000,
   })
 
-  return <SummaryContainer isLoading={isLoading} summary={response?.summary} />
+  if (!response) return null
+  return <SummaryContainer isLoading={isLoading} summary={response.summary} />
 }
 
 const SummaryContainer: Component<{
