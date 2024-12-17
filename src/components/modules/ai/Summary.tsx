@@ -25,7 +25,6 @@ export const AISummary: FC<AiSummaryProps> = (props) => {
     queryKey: ['ai-summary', data.id, API_URL, data.modified],
     queryFn: async () => {
       const response = await apiClient.ai.getSummary({ articleId: payload })
-      console.log(response)
       if (!response) throw new Error('请求错误')
       return response.$serialized
     },
