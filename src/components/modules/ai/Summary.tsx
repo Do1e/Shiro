@@ -2,15 +2,13 @@
 
 import type { NoteModel, PageModel, PostModel } from '@mx-space/api-client'
 import { useQuery } from '@tanstack/react-query'
+import { env } from 'next-runtime-env'
 import type { FC } from 'react'
-import { useMemo } from 'react'
 
 import { LogosOpenaiIcon } from '~/components/icons/platform/OpenAIIcon'
 import { AutoResizeHeight } from '~/components/modules/shared/AutoResizeHeight'
 import { API_URL } from '~/constants/env'
 import { clsxm } from '~/lib/helper'
-import { isNoteModel, isPageModel, isPostModel } from '~/lib/url-builder'
-import type { ArticleDataType } from '~/types/api'
 
 export interface AiSummaryProps {
   data: PostModel | NoteModel | PageModel
@@ -20,49 +18,32 @@ export interface AiSummaryProps {
 export const AISummary: FC<AiSummaryProps> = (props) => {
   const { data } = props
 
-  const payload = useMemo(() => {
-    let payload: ArticleDataType
+  const payload = data.id
 
-    if (isPostModel(data)) {
-      payload = {
-        category: data.category.slug,
-        slug: data.slug,
-        type: 'post',
-      }
-    } else if (isNoteModel(data)) {
-      payload = {
-        nid: data.nid,
-        type: 'note',
-      }
-    } else if (isPageModel(data)) {
-      payload = {
-        slug: data.slug,
-        type: 'page',
-      }
-    } else {
-      throw new Error('未知类型')
-    }
-
-    return payload
-  }, [data])
-  const { data: response, isLoading } = useQuery<{
-    summary: string
-    source: string
-  }>({
+  const { data: response, isLoading } = useQuery({
     queryKey: ['ai-summary', data.id, API_URL, data.modified],
     queryFn: async () => {
       const data = await fetch(
-        `/api/ai/summary?data=${encodeURIComponent(
-          JSON.stringify(payload),
-        )}&lang=${navigator.language}`,
+        `${env('NEXT_PUBLIC_API_URL') || '/api/v2'}/ai/summaries/ref/${payload}`,
+        {
+          headers: {
+            Authorization: env('NEXT_PUBLIC_API_KEY') || '',
+          },
+        },
       ).then((res) => res.json())
       if (!data) throw new Error('请求错误')
       return data
     },
     retryDelay: 5000,
   })
-
-  return <SummaryContainer isLoading={isLoading} summary={response?.summary} />
+  if (!response) return null
+  if (response?.summaries.length === 0) return null
+  return (
+    <SummaryContainer
+      isLoading={isLoading}
+      summary={response?.summaries[0].summary}
+    />
+  )
 }
 
 const SummaryContainer: Component<{

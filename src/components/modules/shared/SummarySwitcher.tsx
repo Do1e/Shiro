@@ -35,7 +35,7 @@ export const SummarySwitcher: FC<
         break
       }
       case 'openai': {
-        if (!process.env.OPENAI_API_KEY) break
+        // if (!process.env.OPENAI_API_KEY) break
         if (data) comp = <AISummary data={data} />
       }
     }
