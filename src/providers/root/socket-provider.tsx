@@ -7,9 +7,17 @@ import { deleteActivityPresence } from '~/atoms/activity'
 import { useSocketIsConnect, useSocketSessionId } from '~/atoms/hooks'
 import { usePageIsActive } from '~/hooks/common/use-is-active'
 import { useIsClient } from '~/hooks/common/use-is-client'
+import { useCurrentNoteDataSelector } from '~/providers/note/CurrentNoteDataProvider'
+import { useCurrentPostDataSelector } from '~/providers/post/CurrentPostDataProvider'
 import { SocketEmitEnum } from '~/types/events'
 
 import { socketWorker } from '../../socket/worker-client'
+
+export const useCurrentArticleId = () => {
+  const noteId = useCurrentNoteDataSelector((data) => data?.data?.id)
+  const postId = useCurrentPostDataSelector((data) => data?.id)
+  return noteId || postId
+}
 
 if (typeof window !== 'undefined') {
   import('../../socket/worker-client')
@@ -33,6 +41,12 @@ const SocketContainerImpl: Component = () => {
   const previousWebSocketSessionIdRef = useRef(webSocketSessionId)
 
   const socketIsConnected = useSocketIsConnect()
+  const currentArticleId = useCurrentArticleId()
+  const previousArticleIdRef = useRef<string | null>(null)
+
+  console.log('socketIsConnected', socketIsConnected)
+  console.log('webSocketSessionId', webSocketSessionId)
+  console.log('currentArticleId', currentArticleId)
 
   useEffect(() => {
     const previousWebSocketSessionId = previousWebSocketSessionIdRef.current
@@ -47,6 +61,28 @@ const SocketContainerImpl: Component = () => {
 
     deleteActivityPresence(previousWebSocketSessionId)
   }, [socketIsConnected, webSocketSessionId])
+
+  useEffect(() => {
+    if (!socketIsConnected) return
+
+    const previousArticleId = previousArticleIdRef.current
+    if (
+      previousArticleId &&
+      previousArticleId !== currentArticleId &&
+      previousArticleId
+    ) {
+      socketWorker.emit(SocketEmitEnum.Leave, {
+        roomName: `article-${previousArticleId}`,
+      })
+    }
+    previousArticleIdRef.current = currentArticleId
+
+    if (!currentArticleId) return
+
+    socketWorker.emit(SocketEmitEnum.Join, {
+      roomName: `article-${currentArticleId}`,
+    })
+  }, [socketIsConnected, currentArticleId])
 
   const pageIsActive = usePageIsActive()
   useEffect(() => {
