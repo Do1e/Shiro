@@ -45,7 +45,6 @@ const SocketContainerImpl: Component = () => {
   const socketIsConnected = useSocketIsConnect()
   const currentArticleId = useCurrentArticleId()
   const previousArticleIdRef = useRef<string | null>(null)
-  console.log('currentArticleId', currentArticleId)
 
   useEffect(() => {
     const previousWebSocketSessionId = previousWebSocketSessionIdRef.current
