@@ -80,10 +80,10 @@ export class CrossBellConnector {
           throw new Error('文章链接生成失败')
         }
 
-        const contentWithFooter = `${text}
-
-<span style="text-align: right;font-size: 0.8em; float: right">此文由 [Mix Space](https://github.com/mx-space) 同步更新至 xLog
-原始链接为 <${articleUrl}></span><br ><br >`
+        const contentWithFooter = `<span style="text-align: right;font-size: 0.8em; float: right">此文由 [Mix Space](https://github.com/mx-space) 同步更新至 xLog
+为获得最佳浏览体验，建议访问原始链接
+<${articleUrl}></span><br ><br >
+${text}`
 
         toast.info('正在发布到 xLog...')
 
