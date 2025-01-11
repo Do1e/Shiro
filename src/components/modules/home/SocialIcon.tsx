@@ -56,6 +56,12 @@ const iconSet: Record<
     '#00A1D6',
     (id) => `https://space.bilibili.com/${id}`,
   ],
+  bangumi: [
+    'Bangumi',
+    <BilibiliIcon />,
+    '#F09199',
+    (id) => `https://bgm.tv/user/${id}`,
+  ],
   netease: [
     '网易云音乐',
     <NeteaseCloudMusicIcon />,
