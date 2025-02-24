@@ -183,7 +183,7 @@ const FooterBottom = async () => {
 
   return (
     <div className="mt-12 space-y-3 text-center md:mt-6 md:text-left">
-      <p>
+      <div>
         <span>© {date.replace('{{now}}', currentDate)} </span>
         <a href="/">
           <OwnerName />
@@ -204,7 +204,7 @@ const FooterBottom = async () => {
           <Divider className="inline" />
           <GatewayInfo />
         </span>
-      </p>
+      </div>
       <div>
         <PoweredBy className="my-3 block md:my-0 md:inline" />
         {icp && (
