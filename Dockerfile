@@ -47,6 +47,9 @@ RUN pnpm build
 FROM base AS runner
 WORKDIR /app
 
+RUN apk add proxychains-ng --no-cache
+RUN echo -e '[ProxyList]\nhttp 172.17.0.1 22444\nsocks5 172.17.0.1 22445' > /etc/proxychains/proxychains.conf
+
 ENV NODE_ENV production
 
 # and other docker env inject
@@ -59,4 +62,4 @@ EXPOSE 2323
 
 ENV PORT 2323
 ENV NEXT_SHARP_PATH=/usr/local/lib/node_modules/sharp
-CMD echo "Mix Space Web [Shiro] Image." && node server.js
+CMD proxychains node server.js
