@@ -202,7 +202,7 @@ export const eventHandler = (
         //   },
         // )
       } else {
-        toast.success(`写下一点小思考：\n${(data as RecentlyModel).content}`, {
+        toast.success(`写下一点随笔：\n${(data as RecentlyModel).content}`, {
           autoClose: 10000,
           iconElement: React.createElement(MdiLightbulbOn20),
           onClick: () => {

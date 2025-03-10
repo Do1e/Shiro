@@ -1,6 +1,5 @@
 'use client'
 
-import { useQuery, useQueryClient } from '@tanstack/react-query'
 import clsx from 'clsx'
 import { m } from 'motion/react'
 import Image from 'next/image'
@@ -9,19 +8,14 @@ import { createElement } from 'react'
 
 import { ErrorBoundary } from '~/components/common/ErrorBoundary'
 import {
+  AkarIconsMention,
   FaSolidComments,
   FaSolidFeatherAlt,
   FaSolidHistory,
-  FaSolidUserFriends,
   IcTwotoneSignpost,
-  MdiFlask,
   MdiLightbulbOn20,
-  RMixPlanet,
 } from '~/components/icons/menu-collection'
 import { isSupportIcon, SocialIcon } from '~/components/modules/home/SocialIcon'
-import { usePresentSubscribeModal } from '~/components/modules/subscribe'
-import { StyledButton } from '~/components/ui/button'
-import { NumberSmoothTransition } from '~/components/ui/number-transition/NumberSmoothTransition'
 import {
   BottomToUpTransitionView,
   TextUpTransitionView,
@@ -29,8 +23,6 @@ import {
 import { microReboundPreset, softBouncePreset } from '~/constants/spring'
 import { clsxm } from '~/lib/helper'
 import { noopObj } from '~/lib/noop'
-import { apiClient } from '~/lib/request'
-import { toast } from '~/lib/toast'
 import {
   useAggregationSelector,
   useAppConfigSelector,
@@ -213,6 +205,11 @@ const ActivityScreen = () => {
 
 const windsock = [
   {
+    title: 'Do1e',
+    icon: AkarIconsMention,
+    path: '/about',
+  },
+  {
     title: '文稿',
     path: '/posts',
     type: 'Post',
@@ -226,43 +223,27 @@ const windsock = [
     icon: FaSolidFeatherAlt,
   },
   {
-    title: '度过的时光呀',
+    title: '网站时间线',
     icon: FaSolidHistory,
     path: '/timeline',
   },
   {
-    title: '写下一点思考',
+    title: '写下一点随笔',
     icon: MdiLightbulbOn20,
     path: '/thinking',
   },
   {
-    title: '看看我做些啥',
-    icon: MdiFlask,
-    path: '/projects',
-  },
-  {
-    title: '记录下一言',
+    title: '记下一点名言',
     path: '/says',
     icon: FaSolidComments,
   },
 ]
 
 const Windsock = () => {
-  const likeQueryKey = ['site-like']
-  const { data: count } = useQuery({
-    queryKey: likeQueryKey,
-    queryFn: () => apiClient.proxy('like_this').get(),
-    refetchInterval: 1000 * 60 * 5,
-  })
-
-  const queryClient = useQueryClient()
-
-  const { present: presentSubscribe } = usePresentSubscribeModal()
   return (
     <>
       <div className="center mt-28 flex flex-col">
-        <div className="my-5 text-2xl font-medium">风向标</div>
-        <div className="mb-24 opacity-90">去到别去看看？</div>
+        <div className="mb-5 opacity-90">去到别去看看？</div>
         <ul className="flex flex-col flex-wrap gap-2 gap-y-8 opacity-80 lg:flex-row">
           {windsock.map((item, index) => {
             return (
@@ -291,7 +272,7 @@ const Windsock = () => {
                   },
                 }}
                 key={index}
-                className="flex items-center justify-between text-sm"
+                className="flex items-center justify-between text-lg"
               >
                 <a
                   href={item.path}
