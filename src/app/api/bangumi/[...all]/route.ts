@@ -38,5 +38,10 @@ export const GET = async (req: NextRequest) => {
     headers,
   })
   const data = await response.json()
+  if (data.summary && typeof data.summary === 'string') {
+    data.summary = data.summary.replaceAll('\r\n', '\n')
+    data.summary = data.summary.replaceAll('\n\n', '\n')
+    data.summary = data.summary.replaceAll(/^[\u3000 \t]+/gm, '')
+  }
   return NextResponse.json(data)
 }
