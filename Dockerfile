@@ -1,4 +1,4 @@
-FROM node:18-alpine AS base
+FROM node:22-alpine AS base
 
 RUN npm config set registry https://registry.npmmirror.com
 
