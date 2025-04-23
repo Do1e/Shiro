@@ -149,6 +149,7 @@ export default async function RootLayout(props: PropsWithChildren) {
   }
 
   const themeConfig = data.theme
+  const CLARITY_PROJECT_ID = process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID || ''
 
   return (
     <AppFeatureProvider tmdb={!!process.env.TMDB_API_KEY}>
@@ -173,6 +174,20 @@ export default async function RootLayout(props: PropsWithChildren) {
             media="(prefers-color-scheme: light)"
           />
           <ScriptInjectProvider />
+          {CLARITY_PROJECT_ID && (
+            <script
+              type="text/javascript"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  (function(c,l,a,r,i,t,y){
+                    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+                  })(window, document, "clarity", "script", "${CLARITY_PROJECT_ID}");
+                `,
+              }}
+            />
+          )}
         </head>
         <body
           className={`${sansFont.variable} ${serifFont.variable} m-0 h-full p-0 font-sans`}
