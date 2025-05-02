@@ -531,7 +531,10 @@ const fetchBangumiData: FetchObject = {
     setCardInfo({
       classNames: { cardRoot: '!w-full' },
     })
-    const json = await fetch(`/api/bangumi/${type}/${realId}`)
+    const userLanguage = navigator.language || 'en-US'
+    const json = await fetch(
+      `/api/bangumi/${type}/${realId}?language=${userLanguage}`,
+    )
       .then((r) => r.json())
       .catch((err) => {
         console.error('Error fetching Bangumi data:', err)
