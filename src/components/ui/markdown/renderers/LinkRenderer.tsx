@@ -286,9 +286,6 @@ const GithubUrlRenderL: FC<{
       const { owner, repo, id } = parseGithubTypedUrl(url)
       return (
         <>
-          <p>
-            <MLink href={href}>{href}</MLink>
-          </p>
           <LinkCard
             fallbackUrl={url.toString()}
             id={`${owner}/${repo}/commit/${id}`}
