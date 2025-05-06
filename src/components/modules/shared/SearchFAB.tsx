@@ -137,34 +137,47 @@ const SearchPanelImpl = () => {
           return
         }
 
-        const _list: SearchListType[] = data?.data.map((item: any) => {
+        const idSet = new Set<string>()
+        const _list: SearchListType[] = []
+
+        data?.data.forEach((item: any) => {
+          let listItem
           switch (item.type) {
             case 'post': {
-              return {
+              listItem = {
                 title: item.title,
                 subtitle: item.category.name,
                 id: item.id,
                 url: `/posts/${item.category.slug}/${item.slug}`,
               }
+              break
             }
             case 'note': {
-              return {
+              listItem = {
                 title: item.title,
                 subtitle: '手记',
                 id: item.id,
                 url: `/notes/${item.nid}`,
               }
+              break
             }
             case 'page': {
-              return {
+              listItem = {
                 title: item.title,
                 subtitle: '页面',
                 id: item.id,
                 url: `/${item.slug}`,
               }
+              break
             }
           }
+
+          if (listItem && !idSet.has(listItem.id)) {
+            idSet.add(listItem.id)
+            _list.push(listItem)
+          }
         })
+
         setCurrentSelect(0)
 
         return _list
