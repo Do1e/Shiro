@@ -173,7 +173,7 @@ export default function TimelinePage() {
 
   const subtitle = `共有 ${
     sortedArr.flat(2).filter((i) => typeof i === 'object').length
-  } 篇文章，${!memory ? '再接再厉' : '回顾一下从前吧'}`
+  } 篇文章`
 
   return (
     <NormalContainer>
