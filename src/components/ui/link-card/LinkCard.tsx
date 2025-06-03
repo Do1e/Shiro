@@ -574,7 +574,7 @@ const fetchBangumiData: FetchObject = {
       title: (
         <span className="flex flex-wrap items-end gap-2">
           <span>{title}</span>
-          {title !== originalTitle && (
+          {title !== originalTitle && originalTitle && (
             <span className="text-sm opacity-70">({originalTitle})</span>
           )}
           {type === 'subject' && (
