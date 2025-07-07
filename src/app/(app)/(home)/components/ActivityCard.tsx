@@ -143,7 +143,9 @@ export const ActivityCard = ({ activity }: { activity: ReactActivityType }) => {
                   'max-w-full overflow-auto',
                 )}
               >
-                {RemoveMarkdown(activity.content)}
+                <Link href={'/thinking'}>
+                  {RemoveMarkdown(activity.content)}
+                </Link>
               </div>
             </div>
           </div>
